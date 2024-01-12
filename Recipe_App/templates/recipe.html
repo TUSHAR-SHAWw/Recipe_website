@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{%block start%}
+{% load image_filters %}   
+            <div class="mx-auto card p-3 mt-3 col-9">
+            <form>
+              <div class="mx-8">
+              <label for="exampleInputEmail1" class="form-label">SEARCH</label>
+              <input name="search" type="text" class="form-control" >
+            </div>
+            <button type="submit" class="btn btn-success mt-2">Search Recipe</button>
+            </div>
+          </form>
+      
+       
+
+        <div class="container mt-5">
+          <h2 class="mb-3">Recipees</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-1" >#</th>
+                <th class="col-1" >Recipe Name</th>
+                <th class="col-2" >Recipe Description</th>
+                <th class="col-1" >Image</th>
+                <th class="col-1" >Actions</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in recipes%}
+              <tr>
+                <td class="text-break">{{forloop.counter}}</td>
+                <td class="text-break">{{r.recipe_name}}</td>
+                <td class="text-break">{{r.recipe_description}}</td>
+                <td class="text-break">
+                  {% if r.image_data %}
+   <img src="data:image/jpeg;base64,{{ r.image_data|base64_encode }}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+{% else %}
+  No Image Uploaded
+{% endif %}
+
+                  {% comment %} <img src="/media/{{r.recipe_image}}" style="height : 120px"> {% endcomment %}
+                </td><!-- set media directory so you can access images or files -->
+              <td><a href="/delete_recipe/{{r.id}}" class="btn btn-danger">Delete</a>
+              <a href="/update_recipe/{{r.id}}" class="btn btn-success mt-3">Update</button></td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+
+{% endblock %}

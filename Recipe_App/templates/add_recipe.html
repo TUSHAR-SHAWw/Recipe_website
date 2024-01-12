@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%block start%}
+    
+<div class="containter mx-auto mt-5 card shadow-lg p-3 m-3" style='max-width:800px;' >
+    <form class="col-6 mx-auto p-3 " method="post" enctype="multipart/form-data">
+        <!-- (method="post") is for returing data to the backend, (enctype="multipart/form-data") is required for files-->
+        {% csrf_token %}
+        <!-- csrf_token is required for data submition -->
+        <h2 class="mb-3 mt-2 p-2">Add Your Recipes</h2>
+        <div class="mb-3 mt-2">
+          <label for="exampleInputEmail1" class="form-label p-2">Recipe Name</label>
+          <input name="recipe_name" required type="text" class="form-control" > <!--use (name="")for seleting data in backend -->
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label p-2">Recipe Description</label>
+          <textarea name="recipe_description" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label p-2">Recipe Image</label>
+            <input name="recipe_image" type="file" class="form-control" >
+            
+          </div>
+        <button type="submit" class="btn btn-success">Add Recipe</button>
+      </form>   
+    </div>
+
+ {%endblock%}
+    
