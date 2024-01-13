@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'Recipe_website.wsgi.application'
 DATABASES = {
  	'default': {
  		'ENGINE': 'django.db.backends.postgresql',
-		'NAME': 'bazjjvywrtzqp6hnule9',
-		'USER': 'uhno2k5iypbiq63baszq',
-		'PASSWORD': 'zwyZrqrAk0Grnz6QwauSt8DabmNuT4',
-		'HOST':'bazjjvywrtzqp6hnule9-postgresql.services.clever-cloud.com',
+		'NAME': 'bowllznzqhimzr9qwonf',
+		'USER': 'uqc3wib1bci35sm4zs7r',
+		'PASSWORD': '4gOGDOOj0UKwLyPbcAKEA9ZmCKZkpe',
+		'HOST':'bowllznzqhimzr9qwonf-postgresql.services.clever-cloud.com',
  	    'PORT':'50013',
  	}
 }
