@@ -7,21 +7,29 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q,Sum
-
+from .field import decompress_data
 # Create your views here.
 
 @login_required(login_url="/login/")
-def recipe(request):  
-    quertset= Recipe.objects.all()
-    if request.GET.get("search"):
-        quertset=quertset.filter(recipe_name__icontains=request.GET.get("search"))
-    context={'recipes':quertset}
-    return render(request, 'recipe.html', context)
+def recipe(request): 
+   queryset = Recipe.objects.all()
+   for recipe in queryset:
+       if recipe.image_data:
+           recipe.image_data = decompress_data(recipe.image_data)
+   if request.GET.get("search"):
+       queryset = queryset.filter(recipe_name__icontains=request.GET.get("search"))
+   context = {'recipes': queryset}
+   return render(request, 'recipe.html', context)
+
+
+
 
 def about(request):
     return render(request,'about.html')
+
+
 def add_recipe(request):
-    if request.method =="POST":#this runs after hitting submit button
+  if request.method =="POST":#this runs after hitting submit button
             data = request.POST
             recipe_name = data.get('recipe_name')
             recipe_description = data.get('recipe_description')
@@ -36,7 +44,7 @@ def add_recipe(request):
             image_data=image_data#binary field
         )
             return redirect('/recipe/')#after submiting redirect the so it doesnt contain previous data
-    return render(request,'add_recipe.html')
+  return render(request,'add_recipe.html')
 
 
 def delete_recipe(request,id):
