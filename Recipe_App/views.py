@@ -29,22 +29,27 @@ def about(request):
 
 
 def add_recipe(request):
-  if request.method =="POST":#this runs after hitting submit button
-            data = request.POST
-            recipe_name = data.get('recipe_name')
-            recipe_description = data.get('recipe_description')
-            image_data = request.FILES.get('recipe_image')
-            user = request.user # Get the current logged-in user
-            if image_data:
-                image_data=image_data.read()
-            Recipe.objects.create(
-            user=user, # Provide the user when creating a new Recipe
-            recipe_name=recipe_name,
-            recipe_description=recipe_description,
-            image_data=image_data#binary field
-        )
-            return redirect('/recipe/')#after submiting redirect the so it doesnt contain previous data
-  return render(request,'add_recipe.html')
+   if request.method == "POST":
+       data = request.POST
+       recipe_name = data.get('recipe_name')
+       recipe_description = data.get('recipe_description')
+       image_data = request.FILES.get('recipe_image')
+       user = request.user
+       if image_data:
+           if image_data.size > 1268576: # 1 MB = 1048576 bytes
+               messages.error(request, 'Image size should not exceed 1MB')
+               return redirect('/add_recipe/')
+           else:
+               image_data = image_data.read()
+       Recipe.objects.create(
+           user=user,
+           recipe_name=recipe_name,
+           recipe_description=recipe_description,
+           image_data=image_data
+       )
+       return redirect('/recipe/')
+   return render(request,'add_recipe.html')
+
 
 
 def delete_recipe(request,id):

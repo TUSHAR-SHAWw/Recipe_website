@@ -2,6 +2,15 @@
 {%block start%}
     
 <div class="containter mx-auto mt-5 card shadow-lg p-3 m-3" style='max-width:800px;' >
+  {% if messages %}
+    
+    <div class="alert alert-primary" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+      </ul>
+    </div>
+      {% endif %}
     <form class="col-6 mx-auto p-3 " method="post" enctype="multipart/form-data">
         <!-- (method="post") is for returing data to the backend, (enctype="multipart/form-data") is required for files-->
         {% csrf_token %}
