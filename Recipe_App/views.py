@@ -32,29 +32,31 @@ from PIL import Image
 import io
 
 def add_recipe(request):
-  if request.method == "POST":
-      data = request.POST
-      recipe_name = data.get('recipe_name')
-      recipe_description = data.get('recipe_description')
-      image_data = request.FILES.get('recipe_image')
-      user = request.user
-      if image_data:
-          if image_data.size > 1268576: # 1 MB = 1048576 bytes
-              messages.error(request, 'Image size should not exceed 1MB')
-              return redirect('/add_recipe/')
-          else:
-              img = Image.open(image_data)
-              output = io.BytesIO()
-              img.save(output, format=img.format, quality=20) # Save in the same format as the original image
-              image_data = output.getvalue()
-      Recipe.objects.create(
-          user=user,
-          recipe_name=recipe_name,
-          recipe_description=recipe_description,
-          image_data=image_data
-      )
-      return redirect('/recipe/')
-  return render(request,'add_recipe.html')
+   if request.method == "POST":
+       data = request.POST
+       recipe_name = data.get('recipe_name')
+       recipe_description = data.get('recipe_description')
+       image_data = request.FILES.get('recipe_image')
+       user = request.user
+       if image_data:
+           if image_data.size > 1268576: # 1 MB = 1048576 bytes
+               messages.error(request, 'Image size should not exceed 1MB')
+               return redirect('/add_recipe/')
+           else:
+               img = Image.open(image_data)
+               output = io.BytesIO()
+               img.save(output, format='JPEG', quality=20) # Always save as JPEG
+               image_data = output.getvalue()
+       Recipe.objects.create(
+           user=user,
+           recipe_name=recipe_name,
+           recipe_description=recipe_description,
+           image_data=image_data
+       )
+       return redirect('/recipe/')
+   return render(request,'add_recipe.html')
+
+
 
 
 

@@ -1,0 +1,42 @@
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+.fixed-size-image {
+  aspect-ratio: 16 / 12; /* Adjust this value according to your needs */
+  width: 100%;
+  object-fit: cover;
+}
+
+.column-width-limit {
+  width: 1rem;
+  
+}
+
+.cell-content {  
+  max-height: 150px;
+  overflow: auto;
+ }
+@media screen and (max-width: 600px) {
+  .navtext {
+    font-size: 2.5vw
+  }
+  .fs {
+    font-size: 2.5vw;
+  }
+  .fss {
+    font-size: 2.5vw;
+  }
+
+  .fixed-size-image {
+    aspect-ratio: 9 / 16; /* Adjust this value according to your needs */
+    width: 100%;
+    object-fit: cover;
+  }
+  .cell-content {  
+    height: 110px;
+    overflow: auto;
+   }
+}

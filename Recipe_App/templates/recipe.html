@@ -1,52 +1,83 @@
-{% extends "base.html" %}
-{%block start%}
-{% load image_filters %}   
-            <div class="mx-auto card p-3 mt-3 col-9">
-            <form>
-              <div class="mx-8">
-              <label for="exampleInputEmail1" class="form-label">SEARCH</label>
-              <input name="search" type="text" class="form-control" >
-            </div>
-            <button type="submit" class="btn btn-success mt-2">Search Recipe</button>
-            </div>
-          </form>
-      
-       
+{% extends "base.html" %} {%block start%} {% load image_filters %}
 
-        <div class="container mt-5">
-          <h2 class="mb-3">Recipees</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="col-1" >#</th>
-                <th class="col-1" >Recipe Name</th>
-                <th class="col-2" >Recipe Description</th>
-                <th class="col-1" >Image</th>
-                <th class="col-1" >Actions</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              {% for r in recipes%}
-              <tr>
-                <td class="text-break">{{forloop.counter}}</td>
-                <td class="text-break">{{r.recipe_name}}</td>
-                <td class="text-break">{{r.recipe_description}}</td>
-                <td class="text-break">
-                  {% if r.image_data %}
-   <img src="data:image/jpeg;base64,{{ r.image_data|base64_encode }}" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
-{% else %}
-  No Image Uploaded
-{% endif %}
+<div class="mx-auto col-6 mt-4">
+  <form class="d-flex" role="search">
+    <input
+      name="search"
+      class="form-control me-2 navtext"
+      type="text"
+      placeholder="Search Recipes"
+      aria-label="Search"
+    />
+    <button type="submit" class="btn btn-success navtext">Search</button>
+  </form>
+</div>
 
-                  {% comment %} <img src="/media/{{r.recipe_image}}" style="height : 120px"> {% endcomment %}
-                </td><!-- set media directory so you can access images or files -->
-              <td><a href="/delete_recipe/{{r.id}}" class="btn btn-danger">Delete</a>
-              <a href="/update_recipe/{{r.id}}" class="btn btn-success mt-3">Update</button></td>
-              </tr>
-              {%endfor%}
-            </tbody>
-          </table>
-        </div>
+<div class="container mt-3" style="width: 97%">
+  <div class="d-flex justify-content-between">
+      <h2 class="mb-3">Recipes</h2>
+      <a
+        href="/add-recipes/"
+        class="btn btn-success mb-3 navtext"
+        >Add Recipe</a>
+  </div>
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th class="text-center fss" style="width: 17%">Recipe Name</th>
+        <th class="text-center fss" style="width: 30%">Recipe Description</th>
+        <th class="text-center fss" style="width: 20%">Image</th>
+        <th class="text-center fss" style="width: 10%">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in recipes%}
+      <tr>
+        <td class="text-break text-center"
+        style="height: 5rem; vertical-align: middle">
+          <div class="cell-content fs" style="height: 5rem overflow: auto;">
+            {{r.recipe_name}}
+          </div>
+        </td>
+        <td
+          class="text-break text-center"
+          style="height: 5rem; vertical-align: middle"
+        >
+          <div class="cell-content fs" style="height: 5rem overflow: auto;">
+            {{r.recipe_description}}
+          </div>
+        </td>
+        <td >
+          {% if r.image_data %}
+          <img
+            src="data:image/jpeg;base64,{{ r.image_data|base64_encode }}"
+            class="fixed-size-image fs mt-1 text-break text-center"
+            alt="No Image Uploaded"
+          />
+          {% else %}
+          <p class="fs" style="height: 5rem; vertical-align: middle">
+            No Image uUploaded
+          </p>
+          {% endif %}
+        </td>
+        <td class="text-center align-middle" style="vertical-align: middle">
+          <div class="c" role="group">
+              <a
+              href="/update_recipe/{{r.id}}"
+              class="btn btn-success navtext"
+              >Update</a
+              >
+              <a
+                href="/delete_recipe/{{r.id}}"
+                class="btn btn-danger mt-1 navtext"
+                >Delete</a
+              >
+          </div>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}

@@ -87,12 +87,12 @@ DATABASES = {
  	}
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
@@ -131,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Recipe_website/static'),  # Replace 'your_app' with your app name
+    os.path.join(BASE_DIR, 'Recipe_App/static'),  # Replace 'your_app' with your app name
 ]
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles_build','static')
 
