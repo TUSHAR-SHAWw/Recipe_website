@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q,Sum
 from .field import decompress_data
+from django.core.paginator import Paginator
 # Create your views here.
 
 @login_required(login_url="/login/")
@@ -18,6 +19,9 @@ def recipe(request):
            recipe.image_data = decompress_data(recipe.image_data)
    if request.GET.get("search"):
        queryset = queryset.filter(recipe_name__icontains=request.GET.get("search"))
+   paginator=Paginator(queryset,4)
+   page_no=request.GET.get('page')
+   queryset=paginator.get_page(page_no)
    context = {'recipes': queryset}
    return render(request, 'recipe.html', context)
 

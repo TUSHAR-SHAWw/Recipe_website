@@ -17,7 +17,7 @@
   <div class="d-flex justify-content-between">
       <h2 class="mb-3">Recipes</h2>
       <a
-        href="/add-recipes/"
+        href="/add_recipe/"
         class="btn btn-success mb-3 navtext"
         >Add Recipe</a>
   </div>
@@ -79,5 +79,22 @@
     </tbody>
   </table>
 </div>
+<div class="margin-left">
+  <ul class="pagination pagination-lg justify-content-center">
+      {% if recipes.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ recipes.previous_page_number }}">previous</a></li>
+      {% endif %}
 
+      {% comment %} <span class="current">
+          Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
+      </span> {% endcomment %}
+
+      {% if recipes.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ recipes.next_page_number }}">next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ recipes.paginator.num_pages }}">last &raquo;</a></li>
+      {% endif %}
+    </ul>
+</div>
+</div>
 {% endblock %}
