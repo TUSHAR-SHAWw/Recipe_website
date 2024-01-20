@@ -14,14 +14,16 @@ td {
   width: 1rem;
   
 }
-
+body{
+  background: #f0f0f0;
+}
 .cell-content {  
   max-height: 150px;
   overflow: auto;
  }
 @media screen and (max-width: 600px) {
   .navtext {
-    font-size: 2.5vw
+    font-size: 2.7vw
   }
   .fs {
     font-size: 2.5vw;
@@ -39,4 +41,5 @@ td {
     height: 110px;
     overflow: auto;
    }
+  
 }

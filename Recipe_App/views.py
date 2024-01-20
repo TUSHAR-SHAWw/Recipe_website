@@ -35,6 +35,7 @@ def about(request):
 from PIL import Image
 import io
 
+@login_required(login_url="/login/")
 def add_recipe(request):
    if request.method == "POST":
        data = request.POST

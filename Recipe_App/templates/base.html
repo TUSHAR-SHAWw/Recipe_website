@@ -41,9 +41,9 @@
           <li class="nav-item ms-3">
             <form class="form-inline" method="POST">
                 {%if request.user.is_authenticated %}
-              <a class=" btn btn-success my-2 navtext my-sm-0 text-decoration-none m-2" href="/logout/" >Logout</a>
+              <a class=" btn btn-success  navtext  text-decoration-none" href="/logout/" >Logout</a>
               {% else %}
-              <a class=" btn btn-success my-2 my-sm-0 text-decoration-none m-2" href="/login/" >Login</a>
+              <a class=" btn btn-success navtext text-decoration-none " href="/login/" >Login</a>
               {% endif %}
             </form>
           </li>

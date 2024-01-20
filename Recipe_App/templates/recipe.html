@@ -1,6 +1,6 @@
 {% extends "base.html" %} {%block start%} {% load image_filters %}
 
-<div class="mx-auto col-6 mt-4">
+<div class="mx-auto col-6 mt-5 mb-5">
   <form class="d-flex" role="search">
     <input
       name="search"
@@ -13,12 +13,12 @@
   </form>
 </div>
 
-<div class="container mt-3" style="width: 97%">
+<div class="container mt-3 card shadow-lg " style="width: 97%">
   <div class="d-flex justify-content-between">
-      <h2 class="mb-3">Recipes</h2>
+      <h2 class="mb-3 mt-3 mx-3">Recipes</h2>
       <a
         href="/add_recipe/"
-        class="btn btn-success mb-3 navtext"
+        class="btn btn-success mb-3 mt-3 mx-3 navtext"
         >Add Recipe</a>
   </div>
   <table class="table table-responsive">
