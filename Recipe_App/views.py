@@ -11,7 +11,7 @@ from .field import decompress_data
 from django.core.paginator import Paginator
 # Create your views here.
 
-@login_required(login_url="/login/")
+
 def recipe(request): 
    queryset = Recipe.objects.all()
    for recipe in queryset:
